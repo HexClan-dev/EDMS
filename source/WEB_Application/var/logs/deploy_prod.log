@@ -1,0 +1,118 @@
+================================================================================
+Deployment started at Sat, 06 Oct 2018 12:19:30 +0100
+================================================================================
+
+===> Initializing configuration
+---> Processing the configuration options of the deployer class
+_symfonyEnvironmentEnvVarName : APP_ENV
+binDir                        : bin
+cacheDir                      : var/cache
+composerInstallFlags          : --no-dev --prefer-dist --no-interaction --quiet
+composerOptimizeFlags         : --optimize
+configDir                     : config
+consoleBinaryPath             : 
+controllersToRemove           : []
+deployDir                     : /var/www/html/EDMS/web
+dumpAsseticAssets             : false
+installWebAssets              : true
+keepReleases                  : 5
+localProjectDir               : /var/www/html/EDMS
+logDir                        : var/log
+permissionGroup               : 
+permissionMethod              : chmod
+permissionMode                : 0777
+permissionUser                : 
+remoteComposerBinaryPath      : /usr/local/bin/composer
+remotePhpBinaryPath           : php
+repositoryBranch              : master
+repositoryUrl                 : 
+resetOpCacheFor               : 
+servers                       : 127.0.0.1
+sharedDirs                    : ["var/log"]
+sharedFiles                   : []
+srcDir                        : src
+symfonyEnvironment            : prod
+templatesDir                  : templates
+updateRemoteComposerBinary    : false
+useSshAgentForwarding         : true
+warmupCache                   : true
+webDir                        : public
+writableDirs                  : ["var/cache/","var/log/"]
+---> Checking technical requirements
+[localhost] Executing command: "cd /var/www/html/EDMS && which git"
+[OK] "git" command exists
+[localhost] Executing command: "cd /var/www/html/EDMS && which ssh"
+[OK] "ssh" command exists
+[127.0.0.1] Executing command: "echo 1606267071"
+[OK] The server allows to login via SSH from the local machine
+[127.0.0.1] Executing command: "which /usr/local/bin/composer"
+[OK] "/usr/local/bin/composer" command exists
+Executing __ beforeStartingDeploy __ hook
+
+===> Starting the deployment
+---> Initializing server options
+Enabling SSH agent forwarding for localhost server
+Enabling SSH agent forwarding for 127.0.0.1 server
+Setting the deploy_dir property for 127.0.0.1 server
+---> Creating the remote directory layout
+[127.0.0.1] Executing command: "(export APP_ENV=prod; mkdir -p /var/www/html/EDMS/web && mkdir -p /var/www/html/EDMS/web/releases && mkdir -p /var/www/html/EDMS/web/shared)"
+[127.0.0.1] Executing command: "(export APP_ENV=prod; export _release_path="/var/www/html/EDMS/web/releases/$(date +%Y%m%d%H%M%S)" && mkdir -p $_release_path && echo $_release_path)"
+---> Initializing server directory layout
+Executing __ beforeUpdating __ hook
+Nothing to execute
+
+===> Updating app code
+---> Getting the revision ID of the code repository
+[localhost] Executing command: "(export APP_ENV=prod; cd /var/www/html/EDMS && git ls-remote  master)"
+Code revision hash = (the code revision)
+---> Updating code base with remote_cache strategy
+[127.0.0.1] Executing command: "(export APP_ENV=prod; cd (the remote project_dir) && if [ -d /var/www/html/EDMS/web/repo ]; then cd /var/www/html/EDMS/web/repo && git fetch -q origin && git fetch --tags -q origin && git reset -q --hard (the code revision) && git clean -q -d -x -f; else git clone -q -b master  /var/www/html/EDMS/web/repo && cd /var/www/html/EDMS/web/repo && git checkout -q -b deploy (the code revision); fi)"
+Copying the updated code to the new release directory
+[127.0.0.1] Executing command: "(export APP_ENV=prod; cd (the remote project_dir) && cp -RPp /var/www/html/EDMS/web/repo/* (the remote project_dir))"
+Executing __ beforePreparing __ hook
+Nothing to execute
+
+===> Preparing app
+---> Creating cache directory
+[127.0.0.1] Executing command: "(export APP_ENV=prod; cd (the remote project_dir) && if [ -d (the remote project_dir)/var/cache ]; then rm -rf (the remote project_dir)/var/cache; fi; mkdir -p (the remote project_dir)/var/cache)"
+---> Creating log directory
+[127.0.0.1] Executing command: "(export APP_ENV=prod; cd (the remote project_dir) && if [ -d (the remote project_dir)/var/log ] ; then rm -rf (the remote project_dir)/var/log; fi; mkdir -p (the remote project_dir)/var/log)"
+---> Creating symlinks for shared directories
+[127.0.0.1] Executing command: "(export APP_ENV=prod; cd (the remote project_dir) && mkdir -p /var/www/html/EDMS/web/shared/var/log)"
+[127.0.0.1] Executing command: "(export APP_ENV=prod; cd (the remote project_dir) && if [ -d (the remote project_dir)/var/log ] ; then rm -rf (the remote project_dir)/var/log; fi)"
+[127.0.0.1] Executing command: "(export APP_ENV=prod; cd (the remote project_dir) && ln -nfs /var/www/html/EDMS/web/shared/var/log (the remote project_dir)/var/log)"
+---> Creating symlinks for shared files
+---> Setting permissions for writable dirs using the "chmod" method
+[127.0.0.1] Executing command: "(export APP_ENV=prod; cd (the remote project_dir) && chmod -R 0777 var/cache/ var/log/)"
+---> Installing Composer dependencies
+[127.0.0.1] Executing command: "(export APP_ENV=prod; cd (the remote project_dir) && /usr/local/bin/composer install --no-dev --prefer-dist --no-interaction --quiet)"
+---> Installing web assets
+[127.0.0.1] Executing command: "(export APP_ENV=prod; cd (the remote project_dir) && php (the remote project_dir)/bin/console assets:install (the remote project_dir)/public --symlink --no-debug --env=prod)"
+Executing __ beforeOptimizing __ hook
+Nothing to execute
+
+===> Optimizing app
+---> Warming up cache
+[127.0.0.1] Executing command: "(export APP_ENV=prod; cd (the remote project_dir) && php (the remote project_dir)/bin/console cache:warmup --no-debug --env=prod)"
+[127.0.0.1] Executing command: "(export APP_ENV=prod; cd (the remote project_dir) && chmod -R g+w (the remote project_dir)/var/cache)"
+---> Clearing controllers
+There are no paths to delete.
+[127.0.0.1] Executing command: "(export APP_ENV=prod; cd (the remote project_dir) && rm -rf )"
+---> Optimizing Composer autoloader
+[127.0.0.1] Executing command: "(export APP_ENV=prod; cd (the remote project_dir) && /usr/local/bin/composer dump-autoload --optimize)"
+Executing __ beforePublishing __ hook
+Nothing to execute
+
+===> Publishing app
+---> Updating the symlink
+[127.0.0.1] Executing command: "(export APP_ENV=prod; cd (the remote project_dir) && rm -f /var/www/html/EDMS/web/current && ln -s (the remote project_dir) /var/www/html/EDMS/web/current)"
+[127.0.0.1] Executing command: "(export APP_ENV=prod; cd (the remote project_dir) && ls -1 /var/www/html/EDMS/web/releases)"
+[127.0.0.1] Skipping cleanup of old releases; unexpected "" directory found (all directory names should be timestamps)
+Executing __ beforeFinishingDeploy __ hook
+
+===> Finishing the deployment
+
+--------------------------------------------------------------------------------
+[OK] Deployment was successful
+--------------------------------------------------------------------------------
+
